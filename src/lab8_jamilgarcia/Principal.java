@@ -67,6 +67,7 @@ public class Principal extends javax.swing.JFrame {
         b_agregarUn = new javax.swing.JButton();
         cb_SerVivo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         tf_planetaM = new javax.swing.JTextField();
@@ -157,6 +158,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Guardar Todo");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,11 +188,14 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(rd_Humano)
                                 .addGap(18, 18, 18)
                                 .addComponent(rd_Amanto))
-                            .addComponent(b_agregarSV)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(tf_planeta, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(sp_anios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))))
-                .addGap(195, 195, 195)
+                                .addComponent(sp_anios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(b_agregarSV)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                                .addComponent(jButton2)))))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -197,7 +208,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(b_agregarUn)
                             .addComponent(cb_SerVivo, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton1))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +255,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(97, 97, 97)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b_agregarSV)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(93, 93, 93))
         );
 
@@ -411,7 +423,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
-        GuardarTodo();
+
        
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -554,6 +566,11 @@ public class Principal extends javax.swing.JFrame {
         CargarTodo();
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        GuardarTodo();
+    }//GEN-LAST:event_jButton2MouseClicked
+
     public void CargarComboBox(ArrayList<SeresVivos> SV) {
         DefaultComboBoxModel model
                 = (DefaultComboBoxModel) cb_SerVivo.getModel();
@@ -587,12 +604,12 @@ public class Principal extends javax.swing.JFrame {
         AdminSeresVivos as = new AdminSeresVivos("./ficheros/SeresVivos.tcr");
         AdminUniverso au = new AdminUniverso("./ficheros/Universo.tcr");
         as.cargarArchivo();
-        for (int i = 0; i < SereV.size()/2; i++) {
+        for (int i = 0; i < SereV.size(); i++) {
             as.setSeresV(SereV.get(i));
         }
         as.escribirArchivo();
         au.cargarArchivo();
-        for (int i = 0; i < Uni.size()/2; i++) {
+        for (int i = 0; i < Uni.size(); i++) {
             au.setUniverso(Uni.get(i));
         }
         au.escribirArchivo();
@@ -646,6 +663,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_SeresVivos;
     private javax.swing.JComboBox<String> cb_Universos;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

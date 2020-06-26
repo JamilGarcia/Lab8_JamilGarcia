@@ -1,8 +1,11 @@
 package lab8_jamilgarcia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Universo {
+public class Universo implements Serializable{
+    
+    private static final long SerialVersionUID = 2L;
     private String nombre; 
     ArrayList <SeresVivos> seres = new ArrayList(); 
 

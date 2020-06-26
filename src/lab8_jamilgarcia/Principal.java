@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        CargarTodo();
+        
     }
 
     /**
@@ -66,6 +66,7 @@ public class Principal extends javax.swing.JFrame {
         tf_NombreUn = new javax.swing.JTextField();
         b_agregarUn = new javax.swing.JButton();
         cb_SerVivo = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         tf_planetaM = new javax.swing.JTextField();
@@ -144,6 +145,18 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Cargar Todo");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,7 +195,8 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_NombreUn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(b_agregarUn)
-                            .addComponent(cb_SerVivo, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cb_SerVivo, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1))
                 .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -228,7 +242,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(rd_Humano)
                     .addComponent(rd_Amanto))
                 .addGap(97, 97, 97)
-                .addComponent(b_agregarSV)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b_agregarSV)
+                    .addComponent(jButton1))
                 .addGap(93, 93, 93))
         );
 
@@ -396,6 +412,7 @@ public class Principal extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
         GuardarTodo();
+       
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void cb_SeresVivosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_SeresVivosItemStateChanged
@@ -487,7 +504,7 @@ public class Principal extends javax.swing.JFrame {
                 Universo Univer = new Universo(nombre);
                 Univer.setSer(SV);
                 SereV.get(Uni.size() - 1).setUniversoSV(Uni.size() - 1);
-                AdminUniverso ap = new AdminUniverso("./ficheros/Universos.tcr");
+                AdminUniverso ap = new AdminUniverso("./ficheros/Universo.tcr");
                 ap.cargarArchivo();
                 ap.setUniverso(Univer);
                 ap.escribirArchivo();
@@ -528,6 +545,15 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_b_agregarSVMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        CargarTodo();
+    }//GEN-LAST:event_jButton1MouseClicked
+
     public void CargarComboBox(ArrayList<SeresVivos> SV) {
         DefaultComboBoxModel model
                 = (DefaultComboBoxModel) cb_SerVivo.getModel();
@@ -550,6 +576,8 @@ public class Principal extends javax.swing.JFrame {
     public void CargarTodo() {
         AdminSeresVivos as = new AdminSeresVivos("./ficheros/SeresVivos.tcr");
         AdminUniverso au = new AdminUniverso("./ficheros/Universo.tcr");
+        as.cargarArchivo();
+        au.cargarArchivo();
         SereV = as.getListaSV();
         Uni = au.getListaUni();
         CargarComboBox(SereV);
@@ -559,10 +587,14 @@ public class Principal extends javax.swing.JFrame {
         AdminSeresVivos as = new AdminSeresVivos("./ficheros/SeresVivos.tcr");
         AdminUniverso au = new AdminUniverso("./ficheros/Universo.tcr");
         as.cargarArchivo();
-        as.setListaSV(SereV);
+        for (int i = 0; i < SereV.size()/2; i++) {
+            as.setSeresV(SereV.get(i));
+        }
         as.escribirArchivo();
         au.cargarArchivo();
-        au.setListaUni(Uni);
+        for (int i = 0; i < Uni.size()/2; i++) {
+            au.setUniverso(Uni.get(i));
+        }
         au.escribirArchivo();
         CargarComboBox(SereV);
     }
@@ -571,6 +603,7 @@ public class Principal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+       
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -598,7 +631,7 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
-
+                
             }
         });
     }
@@ -612,6 +645,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_SerVivo;
     private javax.swing.JComboBox<String> cb_SeresVivos;
     private javax.swing.JComboBox<String> cb_Universos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -648,6 +682,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tf_planeta;
     private javax.swing.JTextField tf_planetaM;
     // End of variables declaration//GEN-END:variables
+
     ArrayList<SeresVivos> SereV = new ArrayList();
     ArrayList<Universo> Uni = new ArrayList();
 

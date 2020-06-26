@@ -1,6 +1,10 @@
 package lab8_jamilgarcia;
 
-public class SeresVivos {
+import java.io.Serializable;
+
+public class SeresVivos implements Serializable{
+    
+    private static final long SerialVersionUID = 1L;
     private String nombre; 
     private int poder; 
     private int anios; 

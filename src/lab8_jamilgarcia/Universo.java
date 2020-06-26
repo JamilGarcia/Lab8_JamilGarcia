@@ -9,7 +9,6 @@ public class Universo {
     public Universo() {
     }
 
-    
     public Universo(String nombre) {
         this.nombre = nombre;
     }
@@ -35,6 +34,9 @@ public class Universo {
         return nombre;
     }
     
+     public void setSer(SeresVivos p) {
+        this.seres.add(p);
+    }
     
     
 }

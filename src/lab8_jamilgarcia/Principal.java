@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.ComboBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -28,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        CargarTodo();
     }
 
     /**
@@ -54,8 +57,6 @@ public class Principal extends javax.swing.JFrame {
         tf_planeta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jl_SerVivoUn = new javax.swing.JList<>();
         b_agregarSV = new javax.swing.JButton();
         rd_Humano = new javax.swing.JRadioButton();
         rd_Amanto = new javax.swing.JRadioButton();
@@ -64,7 +65,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         tf_NombreUn = new javax.swing.JTextField();
         b_agregarUn = new javax.swing.JButton();
-        b_Actualizarlista = new javax.swing.JButton();
+        cb_SerVivo = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         tf_planetaM = new javax.swing.JTextField();
@@ -79,29 +80,21 @@ public class Principal extends javax.swing.JFrame {
         rd_amantoM = new javax.swing.JRadioButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jl_SeresVivosM = new javax.swing.JList<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jl_UniversosM = new javax.swing.JList<>();
         b_SerVIvo = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        b_trasladar = new javax.swing.JButton();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        b_ActualizarListasM = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        b_Cargar = new javax.swing.JButton();
-        b_Guardar = new javax.swing.JButton();
+        cb_SeresVivos = new javax.swing.JComboBox<>();
+        cb_Universos = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Nombre: ");
 
@@ -123,9 +116,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel5.setText("Raza:");
 
         jLabel6.setText("Ser Vivo:");
-
-        jl_SerVivoUn.setModel(new DefaultListModel());
-        jScrollPane1.setViewportView(jl_SerVivoUn);
 
         b_agregarSV.setText("Agregar Ser Vivo");
         b_agregarSV.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,13 +144,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        b_Actualizarlista.setText("Actualizar Lista");
-        b_Actualizarlista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                b_ActualizarlistaMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -185,13 +168,10 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(rd_Amanto))
                             .addComponent(b_agregarSV)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tf_planeta, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sp_anios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                                .addGap(81, 81, 81)
-                                .addComponent(b_Actualizarlista)))))
-                .addGap(25, 25, 25)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(tf_planeta, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(sp_anios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))))
+                .addGap(195, 195, 195)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -200,10 +180,10 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_NombreUn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(b_agregarUn))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                            .addComponent(b_agregarUn)
+                            .addComponent(cb_SerVivo, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +192,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tf_NombreSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,33 +207,27 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(sl_poder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(sp_anios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3))
-                            .addGap(33, 33, 33)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(tf_planeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(31, 31, 31)
-                        .addComponent(b_Actualizarlista)))
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(rd_Humano)
-                            .addComponent(rd_Amanto)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(b_agregarUn)))
-                .addGap(76, 76, 76)
+                            .addComponent(sp_anios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_planeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(b_agregarUn)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(cb_SerVivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(rd_Humano)
+                    .addComponent(rd_Amanto))
+                .addGap(97, 97, 97)
                 .addComponent(b_agregarSV)
                 .addGap(93, 93, 93))
         );
@@ -291,18 +265,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel14.setText("Años:");
 
-        jLabel15.setText("Agregar Ser Vivo");
-
-        jl_SeresVivosM.setModel(new DefaultListModel());
-        jl_SeresVivosM.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jl_SeresVivosMMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(jl_SeresVivosM);
-
-        jl_UniversosM.setModel(new DefaultListModel());
-        jScrollPane4.setViewportView(jl_UniversosM);
+        jLabel15.setText("Modificar Ser Vivo");
 
         b_SerVIvo.setText("Eliminar Ser VIvo");
         b_SerVIvo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -311,65 +274,36 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setText("Para Trasladar un Ser Vivo a un universo:");
-
-        jLabel17.setText("-Seleccione Un SerVivo de la primera lista");
-
-        jLabel18.setText("-Seleccione un Universo de la seguna lista");
-
-        jLabel19.setText("-Toque el boton \"Trasladar\"");
-
-        b_trasladar.setText("Trasladar");
-        b_trasladar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                b_trasladarMouseClicked(evt);
+        cb_SeresVivos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_SeresVivosItemStateChanged(evt);
             }
         });
 
-        jLabel20.setText("Para Modifixar un SerVivo:");
+        jLabel25.setText("Universo:");
 
-        jLabel21.setText("-Seleccione Un SerVivo de la primera lista");
-
-        jLabel22.setText("-Modifique lo deseado Y toque \"Modificar Ser Vivo\"");
-
-        jLabel23.setText("Para Eliminar SerVivo:");
-
-        jLabel24.setText("-Seleccione Un SerVivo De la primera Lista");
-
-        b_ActualizarListasM.setText("ActualizarListas");
-        b_ActualizarListasM.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                b_ActualizarListasMMouseClicked(evt);
-            }
-        });
-        b_ActualizarListasM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_ActualizarListasMActionPerformed(evt);
-            }
-        });
+        jLabel26.setText("SerVivo:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel22)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel12)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel14)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel11))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addGap(20, 20, 20)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(rd_humanoM)
-                                .addGap(18, 18, 18)
-                                .addComponent(rd_amantoM))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(sl_PoderM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -377,153 +311,68 @@ public class Principal extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(tf_planetaM, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(sp_aniosM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel24)
-                                            .addComponent(jLabel23)))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(72, 72, 72)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(b_ActualizarListasM)
-                                            .addComponent(b_SerVIvo)))))))
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel20)
+                                .addGap(70, 70, 70)
+                                .addComponent(jLabel26)
+                                .addGap(18, 18, 18)
+                                .addComponent(cb_SeresVivos, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel15)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cb_Universos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(rd_humanoM)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rd_amantoM)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jButton3)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel17)
-                                .addComponent(jLabel16)
-                                .addComponent(jLabel18)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                        .addComponent(b_trasladar)
-                        .addGap(174, 174, 174))))
+                        .addGap(109, 109, 109)
+                        .addComponent(jButton3)
+                        .addGap(81, 81, 81)
+                        .addComponent(b_SerVIvo)))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel13)
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel14)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel10)
                         .addGap(49, 49, 49)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel13)
-                                .addGap(43, 43, 43)
-                                .addComponent(jLabel14)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(261, 261, 261)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jButton3)
-                                            .addComponent(b_trasladar)))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addGap(49, 49, 49)
-                                                .addComponent(jLabel11)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel20)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel21)))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel22))))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(tf_NombreMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(b_SerVIvo)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(sl_PoderM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(11, 11, 11)
-                                        .addComponent(sp_aniosM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(tf_planetaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(37, 37, 37)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(rd_humanoM)
-                                            .addComponent(rd_amantoM)
-                                            .addComponent(b_ActualizarListasM)))))))
+                        .addComponent(jLabel11)
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(cb_Universos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel23)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel24)
-                        .addGap(397, 397, 397)))
-                .addGap(48, 48, 48))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel17)
-                .addGap(5, 5, 5)
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_NombreMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_SeresVivos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26))
+                        .addGap(31, 31, 31)
+                        .addComponent(sl_PoderM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(sp_aniosM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(tf_planetaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rd_humanoM)
+                            .addComponent(rd_amantoM))))
+                .addGap(51, 51, 51)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(b_SerVIvo))
+                .addGap(81, 81, 81))
         );
 
         jTabbedPane1.addTab("Modificar/Eliminar", jPanel2);
-
-        b_Cargar.setText("Cargar");
-        b_Cargar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                b_CargarMouseClicked(evt);
-            }
-        });
-
-        b_Guardar.setText("Guardar");
-        b_Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                b_GuardarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(402, 402, 402)
-                        .addComponent(b_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(b_Cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(b_Cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(b_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Guardar/Cargar", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -544,8 +393,115 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        GuardarTodo();
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void cb_SeresVivosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_SeresVivosItemStateChanged
+        // TODO add your handling code here:
+        int flag = cb_SeresVivos.getSelectedIndex();
+        String nombre, planeta, raza;
+        int poder, anios;
+        SeresVivos SV = null;
+        if (flag > -1) {
+            SV = SereV.get(flag);
+            try {
+                tf_NombreMod.setText(SV.getNombre());
+                sl_PoderM.setValue(SV.getPoder());
+                sp_aniosM.setValue(SV.getAnios());
+                tf_planetaM.setText(SV.getPlaneta());
+                if (SV.getRaza().equals("Humano")) {
+                    rd_humanoM.setSelected(true);
+                } else {
+                    rd_amantoM.setSelected(true);
+                }
+                cb_Universos.setSelectedIndex(SV.getUniversoSV());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error 404!!!");
+            }
+
+        }
+    }//GEN-LAST:event_cb_SeresVivosItemStateChanged
+
+    private void b_SerVIvoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_SerVIvoMouseClicked
+        // TODO add your handling code here:
+
+        try {
+            int flag = cb_SeresVivos.getSelectedIndex();
+            if (flag == -1) {
+
+            } else {
+                SeresVivos SV = SereV.get(flag);
+                for (int i = 0; i < Uni.get(SV.getUniversoSV()).getSeres().size(); i++) {
+                    if (Uni.get(SV.getUniversoSV()).getSeres().get(i) == SV) {
+                        Uni.get(SV.getUniversoSV()).getSeres().remove(i);
+                    }
+                }
+                SereV.remove(flag);
+                CargarComboBox(SereV);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error 404!!");
+        }
+    }//GEN-LAST:event_b_SerVIvoMouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+
+        String nombre, planeta, raza;
+        int poder, anios, flag = cb_SeresVivos.getSelectedIndex();
+        try {
+            nombre = tf_NombreMod.getText();
+            poder = sl_PoderM.getValue();
+            anios = (int) sp_aniosM.getValue();
+            planeta = tf_planetaM.getText();
+            if (rd_humanoM.isSelected() == true) {
+                raza = "Humano";
+            } else {
+                raza = "Amanto";
+            }
+            SereV.set(flag, new SeresVivos(nombre, poder, anios, planeta, raza, cb_Universos.getSelectedIndex()));
+            JOptionPane.showMessageDialog(this, "Accion con exito");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Algo salio mal, revise los datos");
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void b_agregarUnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_agregarUnMouseClicked
+        // TODO add your handling code here:
+        try {
+            if (cb_SerVivo.getSelectedIndex() == -1) {
+                JOptionPane.showMessageDialog(this, "Elegia un ser vivo");
+            } else {
+                int flag = cb_SerVivo.getSelectedIndex();
+                String nombre = tf_NombreUn.getText();
+                SeresVivos SV = SereV.get(flag);
+                Uni.add(new Universo(nombre));
+                Uni.get(Uni.size() - 1).seres.add(SV);
+                //System.out.println(Uni.size());
+                Universo Univer = new Universo(nombre);
+                Univer.setSer(SV);
+                SereV.get(Uni.size() - 1).setUniversoSV(Uni.size() - 1);
+                AdminUniverso ap = new AdminUniverso("./ficheros/Universos.tcr");
+                ap.cargarArchivo();
+                ap.setUniverso(Univer);
+                ap.escribirArchivo();
+                JOptionPane.showMessageDialog(this, "Accion con exito");
+                CargarComboBox(SereV);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Algo salió mal, revise los datos");
+        }
+    }//GEN-LAST:event_b_agregarUnMouseClicked
+
     private void b_agregarSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_agregarSVMouseClicked
         // TODO add your handling code here:
+
         String nombre, planeta, raza;
         int poder, anios;
         try {
@@ -558,592 +514,58 @@ public class Principal extends javax.swing.JFrame {
             } else {
                 raza = "Amanto";
             }
+            SeresVivos SV = new SeresVivos(nombre, poder, anios, planeta, raza, -1);
             SereV.add(new SeresVivos(nombre, poder, anios, planeta, raza, -1));
             JOptionPane.showMessageDialog(this, "Accion con exito");
+            AdminSeresVivos ap = new AdminSeresVivos("./ficheros/SeresVivos.tcr");
+            ap.cargarArchivo();
+            ap.setSeresV(SV);
+            ap.escribirArchivo();
+            CargarComboBox(SereV);
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Algo salio mal, revise los datos");
         }
     }//GEN-LAST:event_b_agregarSVMouseClicked
 
-    private void b_agregarUnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_agregarUnMouseClicked
-        // TODO add your handling code here:
-        try {
-            String nombre;
-            SeresVivos SV;
-            nombre = tf_NombreUn.getText();
-            Uni.add(new Universo(nombre));
-            int j = jl_SerVivoUn.getSelectedIndex();
-            SV = SereV.get(j);
-            Uni.get(Uni.size() - 1).seres.add(SV);
-            System.out.println(Uni.size());
-            SereV.get(Uni.size() - 1).setUniversoSV(Uni.size() - 1);
-            JOptionPane.showMessageDialog(this, "Accion con exito");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Algo salió mal, revise los datos");
+    public void CargarComboBox(ArrayList<SeresVivos> SV) {
+        DefaultComboBoxModel model
+                = (DefaultComboBoxModel) cb_SerVivo.getModel();
+        model.removeAllElements();
+        for (int i = 0; i < SV.size(); i++) {
+            model.addElement(SV.get(i));
         }
-    }//GEN-LAST:event_b_agregarUnMouseClicked
+        cb_SerVivo.setModel(model);
+        cb_SeresVivos.setModel(model);
 
-    private void jl_SeresVivosMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_SeresVivosMMouseClicked
-        // TODO add your handling code here:
-        int j = jl_SeresVivosM.getSelectedIndex();
-        tf_NombreMod.setText(SereV.get(j).getNombre());
-        sl_PoderM.setValue(SereV.get(j).getPoder());
-        sp_anios.setValue(SereV.get(j).getAnios());
-        tf_planetaM.setText(SereV.get(j).getPlaneta());
-        if (SereV.get(j).getRaza().equals("Humano")) {
-            rd_humanoM.setSelected(true);
-        } else {
-            rd_amantoM.setSelected(true);
-        }
-    }//GEN-LAST:event_jl_SeresVivosMMouseClicked
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:
-        String nombre, planeta, raza;
-        int poder, anios, j = jl_SeresVivosM.getSelectedIndex(), l = SereV.get(j).getUniversoSV();
-        try {
-            nombre = tf_NombreMod.getText();
-            poder = sl_PoderM.getValue();
-            anios = (int) sp_aniosM.getValue();
-            planeta = tf_planetaM.getText();
-            if (rd_humanoM.isSelected() == true) {
-                raza = "Humano";
-            } else {
-                raza = "Amanto";
-            }
-            SereV.set(j, new SeresVivos(nombre, poder, anios, planeta, raza, l));
-            JOptionPane.showMessageDialog(this, "Accion con exito");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Algo salio mal, revise los datos");
-        }
-    }//GEN-LAST:event_jButton3MouseClicked
-
-    private void b_SerVIvoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_SerVIvoMouseClicked
-        // TODO add your handling code here:
-        try {
-            int j = jl_SeresVivosM.getSelectedIndex(), l = SereV.get(j).getUniversoSV();
-            if (l > -1) {
-                SereV.remove(j);
-                Uni.get(l).seres.remove(j);
-                DefaultListModel lista
-                        = (DefaultListModel) jl_SeresVivosM.getModel();
-                DefaultListModel lista2
-                        = (DefaultListModel) jl_UniversosM.getModel();
-                lista.removeAllElements();
-                lista2.removeAllElements();
-                jl_SeresVivosM.setModel(lista);
-                jl_UniversosM.setModel(lista2);
-
-                for (int i = 0; i < SereV.size(); i++) {
-                    lista.addElement(SereV.get(i));
-                }
-
-                for (int i = 0; i < Uni.size(); i++) {
-                    lista2.addElement(Uni.get(i));
-                }
-                jl_SeresVivosM.setModel(lista);
-                jl_UniversosM.setModel(lista2);
-            } else {
-                DefaultListModel lista
-                        = (DefaultListModel) jl_SeresVivosM.getModel();
-                DefaultListModel lista2
-                        = (DefaultListModel) jl_UniversosM.getModel();
-                lista.removeAllElements();
-                lista2.removeAllElements();
-                jl_SeresVivosM.setModel(lista);
-                jl_UniversosM.setModel(lista2);
-
-                for (int i = 0; i < SereV.size(); i++) {
-                    lista.addElement(SereV.get(i));
-                }
-
-                for (int i = 0; i < Uni.size(); i++) {
-                    lista2.addElement(Uni.get(i));
-                }
-                jl_SeresVivosM.setModel(lista);
-                jl_UniversosM.setModel(lista2);
-                SereV.remove(j);
-            }
-            JOptionPane.showMessageDialog(this, "Accion con exito");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Algo malo pasó contacte al admin");
-        }
-
-    }//GEN-LAST:event_b_SerVIvoMouseClicked
-
-    private void b_ActualizarListasMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ActualizarListasMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_b_ActualizarListasMActionPerformed
-
-    private void b_ActualizarListasMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_ActualizarListasMMouseClicked
-        // TODO add your handling code here:
-        DefaultListModel lista
-                = (DefaultListModel) jl_SeresVivosM.getModel();
-        DefaultListModel lista2
-                = (DefaultListModel) jl_UniversosM.getModel();
-        lista.removeAllElements();
-        lista2.removeAllElements();
-        jl_SeresVivosM.setModel(lista);
-        jl_UniversosM.setModel(lista2);
-
-        for (int i = 0; i < SereV.size(); i++) {
-            lista.addElement(SereV.get(i));
-        }
-
+        DefaultComboBoxModel model2
+                = (DefaultComboBoxModel) cb_Universos.getModel();
+        model2.removeAllElements();
         for (int i = 0; i < Uni.size(); i++) {
-            lista2.addElement(Uni.get(i));
+            model2.addElement(Uni.get(i));
         }
-        jl_SeresVivosM.setModel(lista);
-        jl_UniversosM.setModel(lista2);
+        cb_Universos.setModel(model2);
+    }
 
-    }//GEN-LAST:event_b_ActualizarListasMMouseClicked
+    public void CargarTodo() {
+        AdminSeresVivos as = new AdminSeresVivos("./ficheros/SeresVivos.tcr");
+        AdminUniverso au = new AdminUniverso("./ficheros/Universo.tcr");
+        SereV = as.getListaSV();
+        Uni = au.getListaUni();
+        CargarComboBox(SereV);
+    }
 
-    private void b_ActualizarlistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_ActualizarlistaMouseClicked
-        // TODO add your handling code here:
-        DefaultListModel lista2
-                = (DefaultListModel) jl_SerVivoUn.getModel();
-        lista2.removeAllElements();
-        jl_SerVivoUn.setModel(lista2);
-        for (int i = 0; i < SereV.size(); i++) {
-            lista2.addElement(SereV.get(i));
-
-        }
-        jl_SerVivoUn.setModel(lista2);
-    }//GEN-LAST:event_b_ActualizarlistaMouseClicked
-
-    private void b_trasladarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_trasladarMouseClicked
-        // TODO add your handling code here:
-        int j = jl_SeresVivosM.getSelectedIndex(), l = jl_UniversosM.getSelectedIndex();
-        SereV.get(j).setUniversoSV(l);
-    }//GEN-LAST:event_b_trasladarMouseClicked
-
-    private void b_GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_GuardarMouseClicked
-        // TODO add your handling code here:
-        File f = null;
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-        for (int i = 0; i < Uni.size(); i++) {
-            try {
-            f = new File("./universos.txt");
-            fw = new FileWriter(f, true); //OJO 
-            bw = new BufferedWriter(fw);
-            String u, p, r;
-            u = Uni.get(i).getNombre();
-            bw.write(u+"/");
-            bw.flush();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-            try {
-                bw.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                fw.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        for (int i = 0; i < SereV.size(); i++) {
-            int a = SereV.get(i).getUniversoSV();
-            String nombre, planeta, tipo;
-            int poder, anios;
-            nombre = SereV.get(i).getNombre();
-            poder = SereV.get(i).getPoder();
-            anios = SereV.get(i).getAnios();
-            planeta = SereV.get(i).getPlaneta();
-            tipo = SereV.get(i).getRaza();
-            switch (a) {
-                case 0:
-                    try {
-                        f = new File("./universo0.txt");
-                        fw = new FileWriter(f, false); //OJO 
-                        bw = new BufferedWriter(fw);
-                        String u, p, r, s, t;
-                        bw.write(nombre + "/");
-                        bw.write(poder + "/");
-                        bw.write(anios + "/");
-                        bw.write(planeta + "/");
-                        bw.write(tipo + "/");
-                        bw.flush();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-            {
-                try {
-                    bw.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            {
-                try {
-                    fw.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-                    break;
-                case 1:
-                    try {
-                        f = new File("./universo1.txt");
-                        fw = new FileWriter(f, true); //OJO 
-                        bw = new BufferedWriter(fw);
-                        String u, p, r, s, t;
-                        bw.write(nombre + "/");
-                        bw.write(poder + "/");
-                        bw.write(anios + "/");
-                        bw.write(planeta + "/");
-                        bw.write(tipo + "/");
-                        bw.flush();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        bw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    try {
-                        fw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-                case 2:
-                    try {
-                        f = new File("./Gintama.txt");
-                        fw = new FileWriter(f, true); //OJO 
-                        bw = new BufferedWriter(fw);
-                        String u, p, r, s, t;
-                        bw.write(nombre + "/");
-                        bw.write(poder + "/");
-                        bw.write(anios + "/");
-                        bw.write(planeta + "/");
-                        bw.write(tipo + "/");
-                        bw.flush();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        bw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    try {
-                        fw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-                case 3:
-                    try {
-                        f = new File("./universo3.txt");
-                        fw = new FileWriter(f, true); //OJO 
-                        bw = new BufferedWriter(fw);
-                        String u, p, r, s, t;
-                        bw.write(nombre + "/");
-                        bw.write(poder + "/");
-                        bw.write(anios + "/");
-                        bw.write(planeta + "/");
-                        bw.write(tipo + "/");
-                        bw.write(tipo + "/");
-                        bw.flush();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        bw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    try {
-                        fw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-
-                case 4:
-                    try {
-                        f = new File("./universo4.txt");
-                        fw = new FileWriter(f, true); //OJO 
-                        bw = new BufferedWriter(fw);
-                        String u, p, r, s, t;
-                        bw.write(nombre + "/");
-                        bw.write(poder + "/");
-                        bw.write(anios + "/");
-                        bw.write(planeta + "/");
-                        bw.write(tipo + "/");
-                        bw.flush();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        bw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    try {
-                        fw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-    }//GEN-LAST:event_b_GuardarMouseClicked
-
-    private void b_CargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_CargarMouseClicked
-        // TODO add your handling code here:
-        File f = null;
-        FileReader fr = null;
-        BufferedReader br = null;
-        try {
-            f = new File("./universos.txt");
-            fr = new FileReader(f);
-            br = new BufferedReader(fr);
-            String linea;
-            String[] tokens;
-            while ((linea = br.readLine()) != null) {
-                tokens = linea.split("/");
-                Uni.add(new Universo(tokens[0]));
-                tokens = null;
-                
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            
-        }
-        try {
-            br.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            fr.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        for (int i = 0; i < 5; i++) {
-            switch (i) {
-                case 0:
-                    try {
-                        f = new File("./universo0.txt");
-                        fr = new FileReader(f);
-                        br = new BufferedReader(fr);
-                        String nombre, planeta, raza, linea;
-                        int poder, anios, cont = 0;
-                        String[] tokens, limpiar = null;
-                        while ((linea = br.readLine()) != null) {
-                            tokens = linea.split("/");
-                            cont++;
-                            if (cont <= 5) {
-                                System.out.println(tokens);
-                                cont = 0;
-                                SereV.add(new SeresVivos(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4], 0));
-                                tokens = limpiar;
-                                 System.out.println(SereV);
-                            }
-
-                        }
-                        System.out.println(SereV);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
-                     {
-                        try {
-                            br.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                     {
-                        try {
-                            fr.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-                case 1:
-                    try {
-                        f = new File("./universo1.txt");
-                        fr = new FileReader(f);
-                        br = new BufferedReader(fr);
-                        String nombre, planeta, raza, linea;
-                        int poder, anios, cont = 0;
-                        String[] tokens;
-                        while ((linea = br.readLine()) != null) {
-                            tokens = linea.split("/");
-                            cont++;
-                            if (cont == 5) {
-                                cont = 0;
-                                SereV.add(new SeresVivos(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4], 0));
-                                tokens = null;
-                            }
-
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
-                     {
-                        try {
-                            br.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                     {
-                        try {
-                            fr.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-                case 2:
-                    try {
-                        f = new File("./Gintama.txt");
-                        fr = new FileReader(f);
-                        br = new BufferedReader(fr);
-                        String nombre, planeta, raza, linea;
-                        int poder, anios, cont = 0;
-                        String[] tokens;
-                        while ((linea = br.readLine()) != null) {
-                            tokens = linea.split("/");
-                            cont++;
-                            if (cont == 5) {
-                                cont = 0;
-                                SereV.add(new SeresVivos(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4], 0));
-                                tokens = null;
-                            }
-
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
-                     {
-                        try {
-                            br.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                     {
-                        try {
-                            fr.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-                case 3:
-                    try {
-                        f = new File("./universo3.txt");
-                        fr = new FileReader(f);
-                        br = new BufferedReader(fr);
-                        String nombre, planeta, raza, linea;
-                        int poder, anios, cont = 0;
-                        String[] tokens;
-                        while ((linea = br.readLine()) != null) {
-                            tokens = linea.split("/");
-                            cont++;
-                            if (cont == 5) {
-                                cont = 0;
-                                SereV.add(new SeresVivos(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4], 0));
-                                tokens = null;
-                            }
-
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
-                     {
-                        try {
-                            br.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                     {
-                        try {
-                            fr.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-                case 4:
-                    try {
-                        f = new File("./universo4.txt");
-                        fr = new FileReader(f);
-                        br = new BufferedReader(fr);
-                        String nombre, planeta, raza, linea;
-                        int poder, anios, cont = 0;
-                        String[] tokens;
-                        while ((linea = br.readLine()) != null) {
-                            tokens = linea.split("/");
-                            cont++;
-                            if (cont == 5) {
-                                cont = 0;
-                                SereV.add(new SeresVivos(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4], 0));
-                                tokens = null;
-                            }
-
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
-                     {
-                        try {
-                            br.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                     {
-                        try {
-                            fr.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-                default:
-                    
-            }
-        }
-        
-        for (int i = 0; i < SereV.size(); i++) {
-            int j = SereV.get(i).getUniversoSV();
-            Uni.get(j).seres.add(SereV.get(i));
-        }
-    }//GEN-LAST:event_b_CargarMouseClicked
+    public void GuardarTodo() {
+        AdminSeresVivos as = new AdminSeresVivos("./ficheros/SeresVivos.tcr");
+        AdminUniverso au = new AdminUniverso("./ficheros/Universo.tcr");
+        as.cargarArchivo();
+        as.setListaSV(SereV);
+        as.escribirArchivo();
+        au.cargarArchivo();
+        au.setListaUni(Uni);
+        au.escribirArchivo();
+        CargarComboBox(SereV);
+    }
 
     /**
      * @param args the command line arguments
@@ -1176,21 +598,20 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton b_ActualizarListasM;
-    private javax.swing.JButton b_Actualizarlista;
-    private javax.swing.JButton b_Cargar;
-    private javax.swing.JButton b_Guardar;
     private javax.swing.JButton b_SerVIvo;
     private javax.swing.JButton b_agregarSV;
     private javax.swing.JButton b_agregarUn;
-    private javax.swing.JButton b_trasladar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> cb_SerVivo;
+    private javax.swing.JComboBox<String> cb_SeresVivos;
+    private javax.swing.JComboBox<String> cb_Universos;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -1200,16 +621,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1219,14 +633,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JList<String> jl_SerVivoUn;
-    private javax.swing.JList<String> jl_SeresVivosM;
-    private javax.swing.JList<String> jl_UniversosM;
     private javax.swing.JRadioButton rd_Amanto;
     private javax.swing.JRadioButton rd_Humano;
     private javax.swing.JRadioButton rd_amantoM;
